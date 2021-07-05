@@ -9,67 +9,29 @@ namespace CSharpTut
 {
     class Program
     {
+        delegate double doubleIt(double val);
+        public static int x = 0;
         static void Main(string[] args)
         {
-            List<Animal> animalList = new List<Animal>();
-            List<int> numList = new List<int>();
+            doubleIt dblIt = x => x * 2;
+            Console.WriteLine($"5 * 2 = {dblIt(5)}");
 
-            numList.Add(24);
-            animalList.Add(new Animal() { Name = "Doug" });
-            animalList.Add(new Animal() { Name = "Paul" });
-            animalList.Add(new Animal() { Name = "Sally" });
-            animalList.Insert(1, new Animal() { Name = "Steve" });
-            animalList.RemoveAt(1);
-            Console.WriteLine("Num of Animals : {0}", animalList.Count);
-
-            foreach(Animal a in animalList)
+            List<int> numList = new List<int> {1, 9, 2, 6, 3};
+            var evenList = numList.Where(a => a % 2 == 0).ToList();
+            foreach(var item in evenList)
             {
-                Console.WriteLine(a.Name);
+                Console.WriteLine(item);
             }
 
-            int x = 5, y = 4;
-            Animal.GetSum(ref x, ref y);
-            string strX = "5", strY = "4";
-            Animal.GetSum(ref strX, ref strY);
+            var rangeList = numList.Where(x => (x > 2) && (x < 9)).ToList();
 
-            Rectangle<int> rec1 = new Rectangle<int>(20,50);
-            Console.WriteLine(rec1.GetArea());
+            foreach (var item in rangeList)
+            {
+                Console.WriteLine(item);
+            }
 
-            Rectangle<string> rec2 = new Rectangle<string>("20", "50");
-            Console.WriteLine(rec2.GetArea());
 
             Console.ReadLine();
-        }
-
-        public struct Rectangle<T>
-        {
-            private T width;
-            private T length;
-            public T Width
-            {
-                get { return width; }
-                set { width = value; }
-            }
-            public T Length
-            {
-                get { return length; }
-                set { length = value; }
-            }
-
-            public Rectangle(T w, T l)
-            {
-                width = w;
-                length = l;
-            }
-
-            public string GetArea()
-            {
-                double dblWidth = Convert.ToDouble(Width);
-                double dblLength = Convert.ToDouble(Length);
-
-                return string.Format($"{Width} * {Length} = {dblWidth * dblLength}");
-
-            }
         }
     }
 }
