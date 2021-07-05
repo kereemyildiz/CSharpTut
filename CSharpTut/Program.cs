@@ -10,22 +10,52 @@ namespace CSharpTut
     {
         static void Main(string[] args)
         {
-            Animal cat = new Animal();
+            Animal whiskers = new Animal()
+            {
+                Name = "Whiskers",
+                Sound = "Meow"
+            };
 
-            cat.SetName("Whiskers");
-            cat.Sound = "Meow";
+            Console.WriteLine("******");
 
-            Console.WriteLine("The cat is named {0} and says {1}", cat.GetName(), cat.Sound);
+            Dog grover = new Dog()
+            {
+                Name = "Grover",
+                Sound = "Woof",
+                Sound2 = "Grrrr"
+            };
 
-            cat.Owner = "Kerem";
+            grover.Sound = "Wooooof";
+            whiskers.Name = "Cat";
 
-            Console.WriteLine("{0} owner is {1}", cat.GetName(), cat.Owner);
-            Console.WriteLine("{0} shelter id is {1}", cat.GetName(), cat.idNum);
-            Console.WriteLine("# of Animals {0}", Animal.NumOfAnimals);
+            whiskers.MakeSound();
+            grover.MakeSound();
 
+            whiskers.SetAnimalIDInfo(12345, "Ahmet Yilmaz");
+            grover.SetAnimalIDInfo(14, "Mehmet Atar");
+            whiskers.GetAnimalIDInfo();
+            grover.GetAnimalIDInfo();
 
+            Animal.AnimalHealth getHealth = new Animal.AnimalHealth();
+            Console.WriteLine("Is my animal healthy : {0}",getHealth.HealtyWeight(11,46));
+
+            Animal monkey = new Animal()
+            {
+                Name = "Happy",
+                Sound = "Eeee"
+            };
+
+            Animal spot = new Dog()
+            {
+                Name = "Spot",
+                Sound = "Woofff",
+                Sound2 = "Geeerrrr"
+            };
+
+            monkey.MakeSound();
+            //spot.MakeSound(); // calls base method's function. Thus, polymorphism is necessary
+            spot.MakeSound();
             Console.ReadLine();
-
         }
     }
 }

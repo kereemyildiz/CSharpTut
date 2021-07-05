@@ -5,44 +5,50 @@ namespace CSharpTut
 {
     class Animal
     {
-        public string name;
-        public string sound;
-        public const string SHELTER = "Shelter";
+        private string name;
+        protected string sound;
 
-        public readonly int idNum;
+        protected AnimalIDInfo animalIDInfo = new AnimalIDInfo();
 
-
-        public Animal() :
-            this("No Name", "No Sound"){ }
-
-        public Animal(string name) :
-            this(name, "No Sound"){ }
-
-        public Animal(string name,string sound)
+        public void SetAnimalIDInfo(int idNum,string owner)
         {
-            SetName(name);
+            animalIDInfo.IDNum = idNum;
+            animalIDInfo.Owner = owner;
+        }
+
+        public void GetAnimalIDInfo()
+        {
+            Console.WriteLine($"{Name} had the ID of {animalIDInfo.IDNum}" +
+                $" and is owned by {animalIDInfo.Owner}");
+        }
+
+
+        public virtual void MakeSound()
+        {
+            Console.WriteLine($"{Name} says {Sound}");
+        }
+
+        public Animal()
+            : this("No Name", "No Sound") { Console.WriteLine("default constructor"); }
+        public Animal(string name)
+            : this(name, "No Sound") { Console.WriteLine("name parameter constructor"); }
+        public Animal(string name, string sound)
+        {
+            Console.WriteLine("name and sound parameter constructor");
+            Name = name;
             Sound = sound;
-            NumOfAnimals = 1;
-            Random rnd = new Random();
-            idNum = rnd.Next(1, 1000);
         }
-
-        public void SetName(string name)
+        public string Name
         {
-            if (!name.Any(char.IsDigit))
+            get { return name; }
+            set
             {
-                this.name = name;
-
+                if(!value.Any(char.IsDigit))
+                {
+                    name = "No Name";
+                }
+                name = value;
             }
-            else
-            {
-                this.name = "No Name";
-                Console.WriteLine("Name cannot contain numbers");
-            }
-        }
-        public string GetName()
-        {
-            return name;
         }
         public string Sound
         {
@@ -52,29 +58,23 @@ namespace CSharpTut
                 if (value.Length > 10)
                 {
                     sound = "No Sound";
-                    Console.WriteLine("Sound is too long");
                 }
                 sound = value;
             }
         }
 
-        public string Owner { get; set; } = "No Owner";
-
-        public static int numOfAnimals = 0;
-
-        public static int NumOfAnimals
+        public class AnimalHealth
         {
-            get { return numOfAnimals; }
-            set { numOfAnimals += value; }
+            public bool HealtyWeight(double height,
+                double weight)
+            {
+                double calc = height / weight;
+                if((calc >= .18) && (calc <= .27))
+                {
+                    return true;
+                }
+                return false;
+            }
         }
-
-        public void MakeSound()
-        {
-            Console.WriteLine("{0} says {1}", name, sound);
-        }
-
-
-
-
     }
 }
