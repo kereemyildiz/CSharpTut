@@ -43,18 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ICommand.cs" />
-    <Compile Include="IDrivable.cs" />
-    <Compile Include="IElectornicDevice.cs" />
-    <Compile Include="PowerButton.cs" />
+    <Compile Include="arrayList\arrayList.cs" />
+    <Compile Include="dictionary\dictionary.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Television.cs" />
-    <Compile Include="TVRemote.cs" />
-    <Compile Include="Vehicle.cs" />
+    <Compile Include="queue\queue.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
